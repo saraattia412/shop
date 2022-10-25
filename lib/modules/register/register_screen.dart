@@ -45,17 +45,6 @@ class RegisterScreen extends StatelessWidget {
               );
             }
           }
-          if(state is ErrorSignUpStates) {
-            if (state.loginModel.status!) {
-
-                showToast(text: state.loginModel.message!, state: ToastStates.SUCCESS);
-
-            } else {
-              showToast(
-                text: state.loginModel.message!,
-                state: ToastStates.ERROR,
-              );
-            }}
         },
         builder: (BuildContext context, Object? state) {
           return Scaffold(
