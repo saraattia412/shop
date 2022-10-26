@@ -38,7 +38,8 @@ class RegisterScreen extends StatelessWidget {
                 navigateAndFinish(context,  const ShopLayout());
                 showToast(text: state.loginModel.message!, state: ToastStates.SUCCESS);
               });
-            } else {
+            }
+            else {
               showToast(
                 text: state.loginModel.message!,
                 state: ToastStates.ERROR,
@@ -168,7 +169,7 @@ class RegisterScreen extends StatelessWidget {
                             function: (){
                               if(formKey.currentState!.validate()){
                                 SignUpCubit.get(context)
-                                    .userLogin(
+                                    .userRegister(
                                     name: nameController.text,
                                     email: emailController.text,
                                     phone: phoneController.text,

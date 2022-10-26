@@ -17,33 +17,36 @@ class SignUpCubit extends Cubit<SignUpStates>{
 
   static SignUpCubit get(context) => BlocProvider.of(context);
 
-  LoginModel? loginModel ;
+  late LoginModel loginModel ;
 
-
-  void userLogin({
+  void userRegister({
     required String name,
     required String email,
-    required String phone,
     required String password,
+    required String phone,
   }){
     emit(LoadingSignUpStates());
     DioHelper.postData(
       url: REGISTER,
-      data: {            //map:key&&value
+      data:
+      {
+        'name':name,
         'email':email,
-        'name' :name,
-        'phone' : phone,
-        'password':password,
+        'password': password,
+        'phone':phone,
       },
-    ).then((value)  {
+    ).then((value)
+    {
       print(value.data);
       loginModel = LoginModel.fromJson(value.data);
-      print(loginModel!.status);
-      token = loginModel!.data!.token!;
-      emit(SuccessSignUpStates(loginModel: loginModel!));
+      print(loginModel.status);
+      print(loginModel.message);
+      print(loginModel.data!.token);
+      token = loginModel.data!.token!;
+      emit(SuccessSignUpStates(loginModel: loginModel));
     }).catchError((error){
       print(error.toString());
-      emit(ErrorSignUpStates(loginModel: loginModel!, error: loginModel!.message!));
+      emit(ErrorSignUpStates(error: error.toString()));
     });
   }
 

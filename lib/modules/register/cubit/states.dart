@@ -14,8 +14,7 @@ class SuccessSignUpStates extends SignUpStates{
 
 class ErrorSignUpStates extends SignUpStates{
   late final error;
-  late final LoginModel loginModel;
-  ErrorSignUpStates({required this.loginModel,required this.error});
+  ErrorSignUpStates({required this.error});
 }
 
 class ChangePasswordVisibilitySignUpState extends SignUpStates{}

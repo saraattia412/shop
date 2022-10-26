@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/modules/login/cubit/states.dart';
 
 import '../../../models/login_model.dart';
+import '../../../shared/components/constants.dart';
 import '../../../shared/network/end_points.dart';
 import '../../../shared/network/remote/dio_helper.dart';
 
@@ -16,26 +17,33 @@ class LogInCubit extends Cubit<LogInStates>{
   late LoginModel loginModel ;
 
   void userLogin({
-  required String email,
+    required String email,
     required String password,
-}){
+  }){
     emit(LoadingLogInStates());
     DioHelper.postData(
-        url: LOGIN,
-        data: {            //map:key&&value
-          'email':email,
-          'password':password,
-        },
-    ).then((value)  {
+      url: LOGIN,
+      data:
+      {
+        'email':email,
+        'password': password,
+      },
+    ).then((value)
+    {
       print(value.data);
       loginModel = LoginModel.fromJson(value.data);
       print(loginModel.status);
-      emit(SuccessLogInStates(loginModel: loginModel));
+      print(loginModel.message);
+      print(loginModel.data!.token);
+      token = loginModel.data!.token!;
+      emit(SuccessLogInStates( loginModel: loginModel));
     }).catchError((error){
       print(error.toString());
-      emit(ErrorLogInStates(loginModel.message!));
+      emit(ErrorLogInStates(error.toString()));
     });
   }
+
+
 
 
 

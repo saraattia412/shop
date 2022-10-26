@@ -1,7 +1,7 @@
 class LoginModel {
- late  bool? status;
- late  String? message;
- late UserData? data;
+   bool? status;
+   String? message;
+  UserData? data;
 
 
 //named constructor
