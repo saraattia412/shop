@@ -22,13 +22,12 @@ class LogInScreen extends StatelessWidget {
    LogInScreen({Key? key}) : super(key: key);
    var formKey =GlobalKey<FormState>();
 
-
+   var emailController =TextEditingController();
+   var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
 
-    var emailController =TextEditingController();
-    var passwordController = TextEditingController();
 
     return BlocProvider(
       create: (BuildContext context) => LogInCubit(),
